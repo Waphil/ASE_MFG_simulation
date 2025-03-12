@@ -1,10 +1,14 @@
-___Introduction___:
+# Introduction
 
 This code simulates the signal intensity of asymmetric spin echo (ASE) Magnetic Resonance (MR) images with echo-planar
 imaging (EPI) readout.
 
 The effects of macroscopic magnetic field gradients (MFGs) are modelled as a shift in the time point where the center 
-of k-space is read out.
+of k-space is read out. This results in a mix of R<sub>2</sub> and R<sub>2</sub>' decay of the signal, depending on the local MFGs. The figure
+below shows simulated signal trajectories as a function of the offset $\tau$ for different MFGs in phase-encoding direction
+G<sub>y</sub>.
+
+![s_tau_phase_mfg_simulation_notitle_largefont](https://github.com/user-attachments/assets/6f409074-c418-4501-882e-d748b14f37b5)
 
 Deriving quantitative Blood Oxygen Level Dependent contrast (qBOLD) measurements from ASE images is subject to bias if 
 the effect of MFGs is not appropriately corrected.
@@ -14,7 +18,7 @@ publication. This page will be updated with a link to it, if the publication is 
 
 ______________
 
-___Credit___:
+# Credit:
 
 This work was carried out in a collaboration between University Hospital Zurich and Erasmus Medical Center Rotterdam.
 
@@ -25,7 +29,7 @@ In case of questions, contact Philipp Wallimann
 
 ______________
 
-___Dependencies___:
+# Dependencies:
 
 __For Simulations__
 
@@ -39,7 +43,7 @@ _Other_: FSL (the FMRIB Software Library)
 
 ______________
 
-___Info___:
+# Info:
 
 Code clean-up is still ongoing.
 
