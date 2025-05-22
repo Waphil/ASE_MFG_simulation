@@ -1,6 +1,6 @@
 # Introduction
 
-__ASE_MFG_simulation, Version 0.1.0__
+__ASE_MFG_simulation, Version 0.1.1__
 
 This code simulates the signal intensity of asymmetric spin echo (ASE) Magnetic Resonance (MR) images with echo-planar
 imaging (EPI) readout.
