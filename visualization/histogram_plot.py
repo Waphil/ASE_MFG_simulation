@@ -119,6 +119,8 @@ def plot_histogram(val_arr, bins, is_along_y_axis=False, val_lim=None, cmap=None
         plt.savefig(save_path)
         plt.close()
 
+    return ax
+
 def main():
     val_arr = np.arange(500) 
     bins = 20

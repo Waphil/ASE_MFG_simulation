@@ -158,7 +158,8 @@ def main():
         title = None
         legend_title = r"$G_y \left[\frac{\mu T}{m}\right]$"
 
-        legend_kwargs = dict(loc='center left', bbox_to_anchor=(1.02, 0.5), ncol=1, fancybox=True, shadow=True)
+        legend_kwargs = dict(loc='center left', bbox_to_anchor=(1.02, 0.5), ncol=1, fancybox=True, shadow=False,
+                             framealpha=1.)
 
         x_label = r"$\tau \; \left[ms\right]$"
         y_label = r"Signal $\left[A.U.\right]$"
@@ -213,7 +214,8 @@ def main():
         title = None
         legend_title = r"$k_{0,y} \left[\frac{rad}{mm}\right]$"
 
-        legend_kwargs = dict(loc='center left', bbox_to_anchor=(1.02, 0.5), ncol=1, fancybox=True, shadow=True)
+        legend_kwargs = dict(loc='center left', bbox_to_anchor=(1.02, 0.5), ncol=1, fancybox=True, shadow=False,
+                             framealpha=1.)
 
         x_label = r"$\tau \; \left[ms\right]$"
         y_label = r"Signal $\left[A.U.\right]$"
