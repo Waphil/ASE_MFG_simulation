@@ -63,3 +63,5 @@ def plot_slice_from_3d_image(image_3d_arr, slice_index, mask_3d_arr=None, ax=Non
     if save_path is not None:
         plt.savefig(save_path)
         plt.close()
+
+    return ax

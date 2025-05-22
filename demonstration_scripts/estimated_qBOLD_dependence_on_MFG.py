@@ -12,7 +12,7 @@ from signal_simulation.apparent_oef_calculation import calculate_oef_r2prime_dbv
 from signal_simulation.qbold_static_dephasing_function import (
     calculate_static_dephasing_regime_signal_decay_with_precalculated_integral,
     calculate_random_cylinder_integral_fast)
-from utilities.constants_and_helpers import DEFAULT_GAMMA, calculate_oef_conversion_constant
+from utilities.constants_and_helpers import DEFAULT_GAMMA, calculate_oef_conversion_constant, calculate_gamma_G_product
 
 def main():
     n_steps_precalc = int(1e4)
@@ -47,6 +47,12 @@ def main():
     true_dbv = 0.03
     true_oef = 0.4
 
+    # Define which Gy interval should be shaded in the plots
+    shaded_Gy_min = -11.9
+    shaded_Gy_max = +10.0
+    shaded_region_color = np.array([174./255., 226./255., 239./255.]) #np.array([90./255., 196./255., 223./255.])
+    shaded_region_alpha = 1. #0.5
+
     ######################
     # Calculation starts #
     ######################
@@ -54,6 +60,10 @@ def main():
     true_r2prime = true_dbv * true_oef / calculate_oef_conversion_constant() * 1000 # Have to convert to Hz
     kspace_velocity = 0.077 #1. # Doesn't matter, as we modulate the Gy accordingly # Wrong! It actually matters because of signal dropout
     G_phase_arr = gammaGytov_arr*kspace_velocity/(DEFAULT_GAMMA * 1e-12)
+
+    # Calculate the gammaGytov interval that should be shaded
+    shaded_gammaGytov_min = calculate_gamma_G_product(shaded_Gy_min)/kspace_velocity
+    shaded_gammaGytov_max = calculate_gamma_G_product(shaded_Gy_max)/kspace_velocity
 
     print(f"Precalculating qBOLD Integral with {n_steps_precalc} steps.")
     start_time = time.time()
@@ -146,7 +156,7 @@ def main():
     figsize = (4.416, 3.4) #(4.8, 3.6)#(5.4, 3.9)#(5.2, 3.9)
 
     colors = plt.cm.jet(np.linspace(0, 1, phase_0_arr.size))
-    colors_list = list(colors) + ["k"]
+    colors_list = list(colors) + [np.array([153./255., 153./255., 153./255.])] #["k"]
 
     true_val_list = [true_dbv, true_oef, true_r2prime]
     var_name_list = ["DBV", "OEF", "R_2'"]
@@ -164,7 +174,7 @@ def main():
         linestyles[-1] = "--"
 
         alphas = [1. for data in new_data_arr]
-        alphas[-1] = 0.4
+        alphas[-1] = 1. #0.4
 
         if phase_0_arr.size == 1:
             label_list = [f"${var_name}$ from\nstreamlined qBOLD\nwith simulated signal"] + [f"True ${var_name}$"]
@@ -178,7 +188,8 @@ def main():
         #title = f"Streamlined qBOLD: Simulated ${var_name}$"
         title = None
 
-        legend_kwargs = dict(loc='center left', bbox_to_anchor=(1.02, 0.5), ncol=1, fancybox=True, shadow=True)
+        legend_kwargs = dict(loc='center left', bbox_to_anchor=(1.02, 0.5), ncol=1, fancybox=True, shadow=False,
+                             framealpha=1.)
 
         x_label = r"$\gamma G_y / v$"#r"$\frac{\gamma G_y}{v}$"
         y_label = f"Apparent ${var_name}$"
@@ -194,7 +205,11 @@ def main():
                              title=title, x_label=x_label, y_label=y_label, grid_kwargs=grid_kwargs,
                              y_lim=y_lim, x_tick_major_spacing=0.1, y_tick_major_spacing=y_tick_spacing,
                              labels_fontsize=label_fontsize,
-                             x_scale=None, y_scale=None, legend_title=legend_title, legend_kwargs=legend_kwargs)
+                             x_scale=None, y_scale=None, legend_title=legend_title, legend_kwargs=legend_kwargs,
+                             is_show=False)
+        plt.axvspan(shaded_gammaGytov_min, shaded_gammaGytov_max, color=shaded_region_color, alpha=shaded_region_alpha,
+                    lw=0)
+        plt.show()
 
 if __name__ == "__main__":
     main()

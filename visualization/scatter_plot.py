@@ -131,6 +131,8 @@ def scatter_plot_2d_with_histograms(x_arr, y_arr, x_bins, y_bins, figsize=None, 
         plt.savefig(save_path)
         plt.close()
 
+    return ax
+
 def main():
     import numpy.random as random
     import scipy as sp
