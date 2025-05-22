@@ -32,7 +32,11 @@ def basic_multiline_plot(x_arr, y_arr, label_list, ax=None, figsize=None, colors
 
     ax.set_title(title)
     for i, label in enumerate(label_list):
-        ax.plot(x_arr, y_arr[i], color=colors[i], linestyle=linestyles[i], alpha=alphas[i], label=label)
+        if np.ndim(x_arr) > 1:
+            x_arr_plot = x_arr[i]
+        else:
+            x_arr_plot = x_arr
+        ax.plot(x_arr_plot, y_arr[i], color=colors[i], linestyle=linestyles[i], alpha=alphas[i], label=label)
 
     if x_label is not None:
         ax.set_xlabel(x_label, fontsize=labels_fontsize)
@@ -74,3 +78,5 @@ def basic_multiline_plot(x_arr, y_arr, label_list, ax=None, figsize=None, colors
 
     if is_show:
         plt.show()
+
+    return ax
