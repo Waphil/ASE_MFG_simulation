@@ -15,8 +15,7 @@ G<sub>y</sub>.
 Deriving quantitative Blood Oxygen Level Dependent contrast (qBOLD) measurements from ASE images is subject to bias if 
 the effect of MFGs is not appropriately corrected.
 
-The paper describing the theory behind this approach, and the results in a volunteer cohort, has been submitted for 
-publication. This page will be updated with a link to it, if the publication is successful.
+A publication describing the theory behind this approach, and the results in a volunteer cohort can be found here: https://doi.org/10.1002/mrm.30625.
 
 ______________
 
